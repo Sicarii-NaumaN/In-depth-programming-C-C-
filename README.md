@@ -1,1 +1,1 @@
-# In-depth-programming-C-C++
+# In-depth-programming C/C++
