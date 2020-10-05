@@ -17,7 +17,7 @@ void cases(int choice) {
 			case 3:
 				break;
 			default:
-				puts("error");
+				puts("Error");
 				break;
 	}
 }
@@ -27,10 +27,9 @@ void add_to_base(FILE *client_book, data *client) {
 		puts("Not acess");
 		return;
 	}
-	if (scaning(client) == 0) {
-		write_to_file(client_book, client);
+	if (scaning(client) == 0 && write_to_file(client_book, client) > 0) {
 	} else {
-		puts("Shit");
+		puts("Can't add to base");
 		fclose(client_book);
 		return;
 	}
@@ -56,10 +55,7 @@ void read_base(FILE *client_book) {
 		fclose(client_book);
 		return;
 	}
-	//size++;
-	//rewind(client_book);
 	
-	//rewind(client_book);
 	fclose(client_book);
 	char **result = NULL;
 	result = alloc_for_array(result, size);
@@ -69,15 +65,6 @@ void read_base(FILE *client_book) {
 		return;
 	}
 	result = write_to_memory(client_book, result);
-	//size_t i = 0;
-	
-
-	/*while (!feof(client_book)) {
-		if (fgets(result[i], 100, client_book) != NULL) {
-			i++;
-		}
-	}*/
-	//size = i;
 	
 	char **sort = NULL;
 	sort = alloc_for_array(sort, size);
@@ -87,16 +74,6 @@ void read_base(FILE *client_book) {
 		return;
 	}
 	sort = write_to_memory(client_book, sort);
-	//rewind(client_book);
-	//i = 0;
-  
-	/*while (!feof(client_book)) {
-		if (fgets(sort[i], 100, client_book) != NULL){
-			i++;
-		}
-	}*/
-
-	//fclose(client_book);
 	
 	int buf1[size];
 
@@ -104,7 +81,6 @@ void read_base(FILE *client_book) {
 		char* str = sort[i];
 		buf1[i] = atoi(strtok(str, " "));
 	}
-	
 	for (size_t i = 0; i < size ; ++i) {
 		for (size_t j = 1 + i; j < size; ++j) {
 			if (buf1[i] > buf1[j]) {
@@ -195,7 +171,6 @@ char** write_to_memory(FILE *client_book, char **paragraph) {
 		puts("Not acess");
 		return NULL;
 	}
-	rewind(client_book);
 
 	if (paragraph == NULL) {
 		fclose(client_book);
@@ -203,7 +178,7 @@ char** write_to_memory(FILE *client_book, char **paragraph) {
 	}
 	size_t i = 0;
 	while (!feof(client_book)) {
-		if (fgets(paragraph[i], 100, client_book) != NULL){
+		if (fgets(paragraph[i], 256, client_book) != NULL){
 			i++;
 		}
 	}
