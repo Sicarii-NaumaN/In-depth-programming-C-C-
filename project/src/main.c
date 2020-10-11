@@ -6,7 +6,7 @@
 int main(void) {
     char var[256];
     copy_menu();
-    while (scanf("%s", var) != -1) {
+    while (scanf("%4s", var) != -1) {
         int choice = atoi(var);
         if (choice == 1 || choice == 2 || choice == 3) {
             if (choice == 3) {
