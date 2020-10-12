@@ -24,18 +24,27 @@ target_link_libraries(task1 lib)
 option(TESTING "Build all tests." OFF) # Makes boolean 'test' available.
 
 if (TESTING)
-    # Locate GTest
-    find_package(GTest REQUIRED)
-    include_directories(${GTEST_INCLUDE_DIRS})
+    # Install Gtest
+    include(FetchContent)
+    FetchContent_Declare(
+            googletest
+            GIT_REPOSITORY https://github.com/google/googletest.git
+            GIT_TAG        release-1.8.0
+    )
+    FetchContent_MakeAvailable(googletest)
+    include(GoogleTest)
+
+    enable_testing()
 
     # Link runTests with what we want to test and the GTest and DZ1 library
-    add_executable(runTests ./test/main.cpp)
-    target_link_libraries(runTests ${GTEST_LIBRARIES} pthread)
+    add_executable(runTests ${TEST_SRC_FILES})
+    target_link_libraries(runTests gtest_main pthread)
     target_link_libraries(runTests lib)
+
     gtest_discover_tests(runTests)
 
     set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/.travis/cmake)
 
-endif()
+endif ()
 
 

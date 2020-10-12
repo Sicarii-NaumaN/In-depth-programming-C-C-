@@ -8,7 +8,7 @@ extern "C" {
 #include "../project/include/utils.h"
 }
 
-const std::string TEST_PATH = "./test/test_database/";
+const std::string TEST_PATH = "../test/test_database/";
 TEST(FileIsEmpty, test2){
     FILE* example1 = nullptr;
     ASSERT_EQ(read_base(example1,(TEST_PATH +"case1").c_str()), EXIT_NORMAL) <<

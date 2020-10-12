@@ -4,7 +4,7 @@
 
 #include "utils.h"
 
-#define PATH "./dataset/database.dat"
+#define PATH "../dataset/database.dat"
 
 void cases(int choice) {
     FILE *client_book = NULL;
@@ -44,7 +44,7 @@ int add_to_base(FILE *client_book, data *client, const char *path) {
     return EXIT_SUCCESS;
 }
 
-int read_base(FILE *client_book,const char *path) {
+int read_base(FILE *client_book, const char *path) {
     client_book = fopen(path, "r");
 
     if (client_book == NULL) {
@@ -155,7 +155,7 @@ char **alloc_for_array(char **paragraph, size_t size) {
     return paragraph;
 }
 
-char **write_to_memory(FILE *client_book, char **paragraph,const char* path) {
+char **write_to_memory(FILE *client_book, char **paragraph, const char* path) {
         client_book = fopen(path, "r");
 
         if (client_book == NULL) {
@@ -175,8 +175,8 @@ char **write_to_memory(FILE *client_book, char **paragraph,const char* path) {
         }
         fclose(client_book);
         return paragraph;
-
 }
+
 int sort_str(char **sort, char** result, size_t size) {
     int *buf1 = (int *) malloc(size * sizeof(int));
     if (buf1 == NULL) {
@@ -202,4 +202,4 @@ int sort_str(char **sort, char** result, size_t size) {
     }
     free(buf1);
     return EXIT_SUCCESS;
- }
+}
